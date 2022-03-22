@@ -21,10 +21,6 @@ Have a look at the newly created files in your root folder:
 
 * .editorconfig
 * .php-cs-fixer.php
-* .eslintrc.json
-* .eslintignore
-* .stylelintrc.json
-* .stylelintignore
 * phpcpd.phar
 * phpstan.neon
 * typoscript-lint.yml
@@ -140,23 +136,6 @@ Danach kannst du alle codechecks ganz einfach mit `composer ci:test` ausführen.
 ]
 </pre>
 
-
-## package.json scripts
-Kopiere diesen Code in die scripts Sektion der package.json.
-Danach kannst du die Codechecks ganz einfach mit `yarn ci:lint:stylelint` bzw. `yarn ci:lint:eslint` ausführen.
-
-### Project
-<pre>
-  "ci:lint:stylelint": "stylelint ./assets/scss/*",
-  "ci:lint:eslint": "eslint ./assets/javascript/*"
-</pre>
-
-### Extension
-<pre>
-  "ci:lint:stylelint": "stylelint ./Resources/*",
-  "ci:lint:eslint": "eslint ./Resources/*"
-</pre>
-
 ---
 
 ### PHP-CS-Fixer rules
@@ -174,12 +153,6 @@ The executable PHAR file of the Copy & Paste Detector
 
 ### typoscript-lint config
 Config file for the TypoScipt linter "typoscript-lint" by Martin Helmich.
-
-### stylelint config
-Config file to the SCSS linting tool "stylelint".
-
-### eslint config
-Config file to the JavaScript tool "eslint".
 
 ### debugoutputCheck.sh
 Checks the source code for usages of debugging output like die(), var_dump(), DebuggerUtility::var_dump(), console.log() etc.

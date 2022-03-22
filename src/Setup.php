@@ -28,10 +28,7 @@ class Setup
         $errors = $this->copyTyposcriptLintConfig($force, 'project') || $errors;
         $errors = $this->copyPhpStanConfig($force, 'project') || $errors;
         $errors = $this->copyPhpCopyPasteDetector($force) || $errors;
-        $errors = $this->copyESLintConfig($force) || $errors;
-        $errors = $this->copyStylelintConfig($force) || $errors;
         $errors = $this->copyDebugOutputCheck($force, 'project') || $errors;
-        $errors = $this->copyRunPipelineLocally($force) || $errors;
 
         return $errors ? 1 : 0;
     }
@@ -45,11 +42,7 @@ class Setup
         $errors = $this->copyTyposcriptLintConfig($force, 'extension') || $errors;
         $errors = $this->copyPhpStanConfig($force, 'extension') || $errors;
         $errors = $this->copyPhpCopyPasteDetector($force) || $errors;
-        $errors = $this->copyESLintConfig($force) || $errors;
-        $errors = $this->copyStylelintConfig($force) || $errors;
         $errors = $this->copyDebugOutputCheck($force, 'extension') || $errors;
-        $errors = $this->copyRunPipelineLocally($force) || $errors;
-
 
         return $errors ? 1 : 0;
     }
@@ -91,62 +84,6 @@ class Setup
             $errors = true;
         } else {
             copy($this->templatesPath . DIRECTORY_SEPARATOR . 'phpcpd.dist.phar', $this->rootPath . DIRECTORY_SEPARATOR . 'phpcpd.phar');
-        }
-
-        return $errors;
-    }
-
-    private function copyRunPipelineLocally(bool $force): bool
-    {
-        $errors = false;
-
-        if (!$force && file_exists($this->rootPath . DIRECTORY_SEPARATOR . 'runPipelineLocally.sh')) {
-            echo "A runPipelineLocally.sh file already exists in your main folder, but the \"force\" option was not set. Nothing copied.\n";
-            $errors = true;
-        } else {
-            copy($this->templatesPath . DIRECTORY_SEPARATOR . 'runPipelineLocally.dist.sh', $this->rootPath . DIRECTORY_SEPARATOR . 'runPipelineLocally.sh');
-        }
-
-        return $errors;
-    }
-
-    private function copyESLintConfig(bool $force): bool
-    {
-        $errors = false;
-
-        if (!$force && file_exists($this->rootPath . DIRECTORY_SEPARATOR . '.eslintrc.json')) {
-            echo "A .eslintrc.json file already exists in your main folder, but the \"force\" option was not set. Nothing copied.\n";
-            $errors = true;
-        } else {
-            copy($this->templatesPath . DIRECTORY_SEPARATOR . '.eslintrc.dist.json', $this->rootPath . DIRECTORY_SEPARATOR . '.eslintrc.json');
-        }
-
-        if (!$force && file_exists($this->rootPath . DIRECTORY_SEPARATOR . '.eslintignore')) {
-            echo "A .eslintignore file already exists in your main folder, but the \"force\" option was not set. Nothing copied.\n";
-            $errors = true;
-        } else {
-            copy($this->templatesPath . DIRECTORY_SEPARATOR . '.eslintignore.dist', $this->rootPath . DIRECTORY_SEPARATOR . '.eslintignore');
-        }
-
-        return $errors;
-    }
-
-    private function copyStylelintConfig(bool $force): bool
-    {
-        $errors = false;
-
-        if (!$force && file_exists($this->rootPath . DIRECTORY_SEPARATOR . '.stylelintrc.json')) {
-            echo "A .stylelintrc.json file already exists in your main folder, but the \"force\" option was not set. Nothing copied.\n";
-            $errors = true;
-        } else {
-            copy($this->templatesPath . DIRECTORY_SEPARATOR . '.stylelintrc.dist.json', $this->rootPath . DIRECTORY_SEPARATOR . '.stylelintrc.json');
-        }
-
-        if (!$force && file_exists($this->rootPath . DIRECTORY_SEPARATOR. '.stylelintignore')) {
-            echo "A .stylelintignore file already exists in your main folder, but the \"force\" option was not set. Nothing copied.\n";
-            $errors = true;
-        } else {
-            copy($this->templatesPath . DIRECTORY_SEPARATOR .'.stylelintignore.dist', $this->rootPath . DIRECTORY_SEPARATOR . '.stylelintignore');
         }
 
         return $errors;
