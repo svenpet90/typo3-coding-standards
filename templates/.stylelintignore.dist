@@ -1,0 +1,6 @@
+# ignore all files...
+*.*
+
+# ... except *.(s)css files
+!*.scss
+!*.css

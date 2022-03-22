@@ -1,0 +1,27 @@
+paths:
+  - ./Configuration
+
+filePatterns:
+  - "*.typoscript"
+
+sniffs:
+  - class: Indentation
+    parameters:
+      useSpaces: true
+      indentPerLevel: 2
+  - class: RepeatingRValue
+    parameters:
+      allowedRightValues:
+        - TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+        - TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+        - TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+        - TYPO3\CMS\Frontend\DataProcessing\CommaSeparatedValueProcessor
+        - TYPO3\CMS\Frontend\DataProcessing\GalleryProcessor
+        - TYPO3\CMS\Frontend\DataProcessing\LanguageMenuProcessor
+        - TYPO3\CMS\Frontend\DataProcessing\SiteProcessor
+        - TYPO3\CMS\Frontend\DataProcessing\SplitProcessor
+        - field:uid
+        - directory
+        - maxDepth
+        - rootline
+        - typo3_encore:app

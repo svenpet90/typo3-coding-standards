@@ -1,0 +1,35 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+$setup = static function ($scriptPath, string $type = null, $forceOption = null) {
+    if (($rootPath = getcwd()) === false) {
+        throw new RuntimeException("Error while determining the current directory.", 1636451407);
+    }
+
+    $dir = __DIR__ . '/vendor';
+
+    while (!file_exists($dir . '/autoload.php')) {
+        if ($dir === $rootPath) {
+            exit(1);
+        }
+        $dir = \dirname($dir);
+    }
+
+    require $dir . '/autoload.php';
+
+    $setup = new \SvenPetersen\CodingStandards\Setup($rootPath);
+
+    switch ($type) {
+        case 'extension':
+            return $setup->forExtension($forceOption === 'force');
+        case 'project':
+            return $setup->forProject($forceOption === 'force');
+        default:
+            echo "You need to specify at least one option. Use 'extension' or 'project'.\n";
+            exit(1);
+    }
+};
+
+$setup(...$_SERVER['argv']);

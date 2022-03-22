@@ -1,0 +1,77 @@
+{
+  "name": "svenpetersen/typo3-coding-standards",
+  "description": "A set of coding guidelines for TYPO3 projects and extensions",
+  "type": "coding-standards",
+  "require": {
+    "php": "^7.4 || ^8.0",
+    "friendsoftypo3/phpstan-typo3": "0.9.0",
+    "helmich/typo3-typoscript-lint": "^2.5",
+    "phpmd/phpmd": "^2.11",
+    "phpmetrics/phpmetrics": "^2.7",
+    "phpstan/extension-installer": "^1.1",
+    "phpstan/phpstan": "^1.4",
+    "phpstan/phpstan-deprecation-rules": "1.0",
+    "saschaegerer/phpstan-typo3": "^1.1",
+    "slam/phpstan-extensions": "^v6.0.0",
+    "squizlabs/php_codesniffer": "^3.5",
+    "symplify/easy-coding-standard": "^10.1.0",
+    "thecodingmachine/phpstan-strict-rules": "v1.0.0",
+    "typo3/coding-standards": "^0.5.0"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "SvenPetersen\\CodingStandards\\": "src"
+    }
+  },
+  "bin": "svenpet-typo3-coding-standards",
+  "authors": [
+    {
+      "name": "Sven Petersen",
+      "email": "sven@hardanders.de"
+    }
+  ],
+  "config": {
+    "allow-plugins": {
+      "ergebnis/composer-normalize": true,
+      "phpstan/extension-installer": true
+    },
+    "sort-packages": true
+  },
+  "scripts": {
+    "ci": [
+      "@ci:composer",
+      "@ci:php"
+    ],
+    "ci:composer": [
+      "@ci:composer:validate",
+      "@ci:composer:normalize",
+      "@ci:composer:require-checker"
+    ],
+    "ci:composer:normalize": "@composer normalize --dry-run",
+    "ci:composer:require-checker": "composer-require-checker",
+    "ci:composer:validate": "@composer validate",
+    "ci:php": [
+      "@ci:php:lint",
+      "@ci:php:cs",
+      "@ci:php:stan",
+      "@ci:php:unit"
+    ],
+    "ci:php:cs": "php-cs-fixer fix -v --dry-run --using-cache no --diff",
+    "ci:php:lint": "phplint --no-progress",
+    "ci:php:stan": "phpstan analyse --no-progress",
+    "ci:php:unit": "phpunit",
+    "fix": [
+      "@fix:composer",
+      "@fix:php"
+    ],
+    "fix:composer": [
+      "@fix:composer:normalize"
+    ],
+    "fix:composer:normalize": "@composer normalize",
+    "fix:php": [
+      "@fix:php:cs"
+    ],
+    "fix:php:cs": "php-cs-fixer fix"
+  }
+}
